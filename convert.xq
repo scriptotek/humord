@@ -1,0 +1,11 @@
+import module namespace emneregister="http://ub.uio.no/emneregister"
+  at "../emneregister.xq";
+
+declare variable $scheme := 'http://data.ub.uio.no/humord/';
+declare variable $uri_base := $scheme;
+
+
+(: To test a specific post: :)
+(: emneregister:post(doc('HUMEregister.xml')/hume/post[descendant::term-id/text()="HUME18920"]) :)
+
+emneregister:toRdf( doc( 'HUMEregister.xml' )/hume/post, $scheme, $uri_base)
