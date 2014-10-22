@@ -1,3 +1,4 @@
+.PHONY: HUMEregister.xml
 
 all: HUMEregister.ttl
 
