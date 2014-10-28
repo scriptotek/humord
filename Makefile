@@ -9,7 +9,7 @@ HUMEregister.rdf.xml: HUMEregister.xml
 	zorba -i convert.xq >| HUMEregister.rdf.xml
 
 HUMEregister.xml:
-	wget http://www.bibsys.no/files/out/humordsok/HUMEregister.xml
+	wget -nv http://www.bibsys.no/files/out/humordsok/HUMEregister.xml
 
 clean:
 	rm HUMEregister.rdf.xml

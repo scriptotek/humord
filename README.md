@@ -71,6 +71,15 @@ Konvertering fra RDF/XML til RDF/Turtle kan gjøres med f.eks.
 Har du Zorba og installert kan du kjøre `make clean && make` for å hente
 en ny XML fra Bibsys, og utføre begge kommandoene ovenfor.
 
+### Oppdatering
+
+Hver mandag klokka 12:
+```
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/zorba-3.0/bin
+
+0 12 * * 1 cd /projects/datakilder/humord && ./publish.sh 2>&1 | tee out.log
+```
+
 ### Lisens
 
 Dataene ble lagt ut i forbindelse med prosjektet
