@@ -28,7 +28,7 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
       <http://data.ub.uio.no/humord/<term-id> a skos:Concept
         skos:prefLabel "<hovedemnefrase> (<kvalifikator)>"@nb
         dcterms:identifier "<term-id>"
-        dcterms:date "<dato>"^^xs:date
+        dcterms:modified "<dato>"^^xs:date
         skos:definition "<definisjon>"@nb
         skos:editorialNote "<noter>"@nb
         skos:editorialNote "Lukket bemerkning: <lukket-bemerkning>"@nb
