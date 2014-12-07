@@ -18,44 +18,73 @@ vår foreløpige modell for mapping av disse elementene til RDF, som
 implementert i `convert.xq`. Vi bruker hovedsakelig
 [SKOS-vokabularet](http://www.w3.org/2004/02/skos/core.html).
 
-    if <se-id> then
 
-      <http://data.ub.uio.no/humord/<se-id> a skos:Concept
-        skos:altLabel "<hovedemnefrase> (<kvalifikator>)"@nb
+- Hvis posten har `<se-id>`:
+  ```turtle
+  <http://data.ub.uio.no/humord/<se-id> a skos:Concept
+      skos:altLabel "<hovedemnefrase> (<kvalifikator>)"@nb
+  ```
 
-    else:
+- Ellers:
+  ```turtle
+  <http://data.ub.uio.no/humord/<term-id> a skos:Concept
+      skos:prefLabel "<hovedemnefrase> (<kvalifikator)>"@nb
+      dcterms:identifier "<term-id>"
+      dcterms:modified "<dato>"^^xs:date
+      skos:definition "<definisjon>"@nb
+      skos:editorialNote "<noter>"@nb
+      skos:editorialNote "Lukket bemerkning: <lukket-bemerkning>"@nb
+      skos:scopeNote "Se også: <gen-se-ogsa-henvisning>"@nb
+      skos:broader <http://data.ub.uio.no/humord/<overordnetterm-id>
+      skos:broader <http://data.ub.uio.no/humord/<ox-id>
+      skos:related <http://data.ub.uio.no/humord/<se-ogsa-id>
+  ```
 
-      <http://data.ub.uio.no/humord/<term-id> a skos:Concept
-        skos:prefLabel "<hovedemnefrase> (<kvalifikator)>"@nb
-        dcterms:identifier "<term-id>"
-        dcterms:modified "<dato>"^^xs:date
-        skos:definition "<definisjon>"@nb
-        skos:editorialNote "<noter>"@nb
-        skos:editorialNote "Lukket bemerkning: <lukket-bemerkning>"@nb
-        skos:scopeNote "Se også: <gen-se-ogsa-henvisning>"@nb
-        skos:broader <http://data.ub.uio.no/humord/<overordnetterm-id>
-        skos:broader <http://data.ub.uio.no/humord/<ox-id>
-        skos:related <http://data.ub.uio.no/humord/<se-ogsa-id>
+#### Merknader og åpne spørsmål
 
-#### Merknader
+* **Se-henvisninger (SE)** mappes til `skos:altLabel` med selve termene som enkle
+  literaler. De beholder ikke egne identifikatorer, slik de har i den nåværende
+  HUMORD-modellen. Om vi skulle ønske å beholde identifikatorene, kan vi
+  uttrykke termene som `skosxl:Label` fremfor literaler, men det kompliserer
+  modellen og er derfor fristende å unngå med mindre vi faktisk har en god
+  grunn til å gjøre det.
 
-* Se-henvisninger mappes til skos:altLabel. De beholder ikke egne identifikatorer.
-  Vi *kan* beholde disse ved å bruke SKOS-XL, men foreløpig seg jeg ikke noe poeng
-  med det.
-  Må diskuteres!
-
-* Generelle se-henvisninger *ignoreres*. Vi har 392 av disse
+* **Generelle se-henvisninger (GE)** *ignoreres* foreløpig. Vi har 392 av disse
   ([liste](https://gist.github.com/danmichaelo/bb9c23fe266da8850d90)).
-  Det er usikkert om det gir mening å bruke disse i mappingøyemed.
-  Må diskuteres.
+  Dersom vi skulle ønske å inkludere de kan vi bruke
+  `isothes:SplitNonPreferredTerm` fra [ISO 25964 SKOS extension](http://lov.okfn.org/dataset/lov/details/vocabulary_iso-thes.html),
+  som er en utvidelse av `skosxl:Label`. Eks:
 
-* '`<type>' ignoreres foreløpig, og postene behandles som andre poster.
+  ```turtle
+  :9767 a isothes:PreferredTerm ,
+      isothes:lexicalValue "Språk" ,
+      isothes:identifier "HUME09767" .
+
+  :3680 a isothes:PreferredTerm ,
+      isothes:lexicalValue "Norden" ,
+      isothes:identifier "HUME03680" .
+
+  :10249 a isothes:SplitNonPreferredTerm ,
+      isothes:lexicalValue "Nordisk språk"@nb ,
+      isothes:identifier "HUME10249" .
+
+  :c1 a isothes:CompoundEquivalence ,
+      isothes:plusUF <:10249>
+      isothes:plusUse <:9767>, <:3680>
+  ```
+  Merk at verdimengden for `isothes:plusUse` er `isothes:PreferredTerm`
+  (en utvidelse av `skosxl:Label`), ikke `skos:Concept`, så vi kan ikke bare
+  ta dette i bruk uten å ta i bruk resten av isothes-modellen også. Isåfall
+  fjerner vi oss fra SKOS som modell, men det går selvfølgelig an å tilby en
+  genere både en isothes-basert RDF og en SKOS-basert RDF.
+
+* **Type** (`<type>`) ignoreres foreløpig, og postene behandles som andre poster.
   Vi har 132 knutetermer (type=K) og 175 fasettindikatorer (type=F).
   Må diskuteres om vi skal behandle disse spesielt.
 
-* Elementet `<toppterm-id>` ignoreres.
+* **Toppterm** (`<toppterm-id>`) ignoreres, kan enkelt sluttes.
 
-* Elementet `<underemnefrase>` er ikke brukt i HUMORD.
+* **Underemnefrase** (`<underemnefrase>`) er ikke brukt i HUMORD.
 
 ### Bruk:
 
