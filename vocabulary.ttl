@@ -1,0 +1,14 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+
+<http://data.ub.uio.no/humord/> a skos:ConceptScheme ;
+    rdfs:label "Humord"@nb ;
+    cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    dcterms:creator "University Library of Oslo"@en,
+                "Universitetsbiblioteket i Oslo"@nb ;
+    dcterms:description "Humord is a Norwegian thesaurus for the subject areas humanities and social sciences."@en,
+        "Humord er en norsk tesaurus for humaniora og samfunnsvitenskap med tilgrensende fagområder."@nb ;
+    dcterms:language <http://lexvo.org/id/iso639-3/nob> .
