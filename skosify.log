@@ -1,7 +1,6 @@
 INFO: Don't know what to do with literal http://purl.org/dc/terms/modified
 INFO: Don't know what to do with literal http://purl.org/dc/terms/identifier
 INFO: Marking loose concept http://data.ub.uio.no/humord/00001 as top concept of scheme http://data.ub.uio.no/humord/
-INFO: Some concepts not reached in initial cycle detection. Re-checking for loose concepts.
 WARNING: Concepts http://data.ub.uio.no/humord/00777 and http://data.ub.uio.no/humord/00786 connected by both skos:broaderTransitive and skos:related, removing skos:related
 WARNING: Concepts http://data.ub.uio.no/humord/05101 and http://data.ub.uio.no/humord/05097 connected by both skos:broaderTransitive and skos:related, removing skos:related
 WARNING: Concepts http://data.ub.uio.no/humord/06200 and http://data.ub.uio.no/humord/06061 connected by both skos:broaderTransitive and skos:related, removing skos:related
@@ -14,6 +13,7 @@ WARNING: Concepts http://data.ub.uio.no/humord/12065 and http://data.ub.uio.no/h
 WARNING: Concepts http://data.ub.uio.no/humord/13069 and http://data.ub.uio.no/humord/06959 connected by both skos:broaderTransitive and skos:related, removing skos:related
 WARNING: Concepts http://data.ub.uio.no/humord/13848 and http://data.ub.uio.no/humord/06936 connected by both skos:broaderTransitive and skos:related, removing skos:related
 WARNING: Concepts http://data.ub.uio.no/humord/14446 and http://data.ub.uio.no/humord/09513 connected by both skos:broaderTransitive and skos:related, removing skos:related
+WARNING: Concepts http://data.ub.uio.no/humord/22619 and http://data.ub.uio.no/humord/09179 connected by both skos:broaderTransitive and skos:related, removing skos:related
 WARNING: Concepts http://data.ub.uio.no/humord/22871 and http://data.ub.uio.no/humord/05542 connected by both skos:broaderTransitive and skos:related, removing skos:related
 WARNING: Concepts http://data.ub.uio.no/humord/22911 and http://data.ub.uio.no/humord/00704 connected by both skos:broaderTransitive and skos:related, removing skos:related
 WARNING: Concepts http://data.ub.uio.no/humord/23562 and http://data.ub.uio.no/humord/09522 connected by both skos:broaderTransitive and skos:related, removing skos:related
@@ -21,20 +21,20 @@ WARNING: Concepts http://data.ub.uio.no/humord/24816 and http://data.ub.uio.no/h
 WARNING: Concepts http://data.ub.uio.no/humord/25099 and http://data.ub.uio.no/humord/08952 connected by both skos:broaderTransitive and skos:related, removing skos:related
 WARNING: Concepts http://data.ub.uio.no/humord/25117 and http://data.ub.uio.no/humord/01528 connected by both skos:broaderTransitive and skos:related, removing skos:related
 WARNING: Concepts http://data.ub.uio.no/humord/26384 and http://data.ub.uio.no/humord/09547 connected by both skos:broaderTransitive and skos:related, removing skos:related
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/12921 skos:broader http://data.ub.uio.no/humord/13581 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/04641 skos:broader http://data.ub.uio.no/humord/04660 found, but not eliminated because eliminate_redundancy is not set
 WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/25751 skos:broader http://data.ub.uio.no/humord/04660 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/18420 skos:broader http://data.ub.uio.no/humord/05226 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/04912 skos:broader http://data.ub.uio.no/humord/07772 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/05228 skos:broader http://data.ub.uio.no/humord/05205 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/03729 skos:broader http://data.ub.uio.no/humord/03728 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/04769 skos:broader http://data.ub.uio.no/humord/04660 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/26857 skos:broader http://data.ub.uio.no/humord/07576 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/07855 skos:broader http://data.ub.uio.no/humord/07854 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/10942 skos:broader http://data.ub.uio.no/humord/05679 found, but not eliminated because eliminate_redundancy is not set
-WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/18454 skos:broader http://data.ub.uio.no/humord/13980 found, but not eliminated because eliminate_redundancy is not set
 WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/23451 skos:broader http://data.ub.uio.no/humord/01018 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/26857 skos:broader http://data.ub.uio.no/humord/07576 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/04641 skos:broader http://data.ub.uio.no/humord/04660 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/18420 skos:broader http://data.ub.uio.no/humord/05226 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/07855 skos:broader http://data.ub.uio.no/humord/07854 found, but not eliminated because eliminate_redundancy is not set
 WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/10959 skos:broader http://data.ub.uio.no/humord/05679 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/03729 skos:broader http://data.ub.uio.no/humord/03728 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/04912 skos:broader http://data.ub.uio.no/humord/07772 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/12921 skos:broader http://data.ub.uio.no/humord/13581 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/10942 skos:broader http://data.ub.uio.no/humord/05679 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/05228 skos:broader http://data.ub.uio.no/humord/05205 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/04769 skos:broader http://data.ub.uio.no/humord/04660 found, but not eliminated because eliminate_redundancy is not set
+WARNING: Redundant hierarchical relationship http://data.ub.uio.no/humord/18454 skos:broader http://data.ub.uio.no/humord/13980 found, but not eliminated because eliminate_redundancy is not set
 WARNING: Resource http://data.ub.uio.no/humord/00979 has 'Avarer'@nb as both prefLabel and altLabel; removing altLabel
 WARNING: Resource http://data.ub.uio.no/humord/09048 has 'Forsteder'@nb as both prefLabel and altLabel; removing altLabel
 WARNING: Resource http://data.ub.uio.no/humord/13914 has 'Slirer'@nb as both prefLabel and altLabel; removing altLabel
