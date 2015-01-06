@@ -82,7 +82,12 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
   Vi har 132 knutetermer (type=K) og 175 fasettindikatorer (type=F).
   Må diskuteres om vi skal behandle disse spesielt.
 
-* **Toppterm** (`<toppterm-id>`) ignoreres, kan enkelt sluttes.
+* **Toppterm** (`<toppterm-id>`) ignoreres foreløpig. SKOS tillater kun ett
+  toppbegrep per tesaurus (`skos:ConceptScheme`), gitt som `skos:topConceptOf`
+  / `skos:hasTopConcept`. Én mulig løsning kunne vært å delt opp Humord i
+  flere mikrotesaurier med hvert sitt toppbegrep, men det finnes hele 8095
+  ulike toppbegrep, og det virker ikke som noen god løsning å lage 80895
+  mikrotesaurier. Må diskuteres.
 
 * **Underemnefrase** (`<underemnefrase>`) er ikke brukt i HUMORD.
 
