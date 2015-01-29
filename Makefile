@@ -1,23 +1,23 @@
-.PHONY: HUMEregister.xml
+.PHONY: humord.xml
 
-all: HUMEregister.ttl
+all: humord.ttl
 
-HUMEregister.ttl: HUMEregister.tmp.ttl
+humord.ttl: humord.tmp.ttl
 	rm -f skosify.log
-	../tools/skosify-sort/skosify-sort.py -c skosify.ini vocabulary.ttl HUMEregister.tmp.ttl -o HUMEregister.ttl
+	../tools/skosify-sort/skosify-sort.py -c skosify.ini vocabulary.ttl humord.tmp.ttl -o humord.ttl
 
-HUMEregister.tmp.ttl: HUMEregister.rdf.xml
-	rapper -i rdfxml -o turtle HUMEregister.rdf.xml >| HUMEregister.tmp.ttl
+humord.tmp.ttl: humord.rdf.xml
+	rapper -i rdfxml -o turtle humord.rdf.xml >| humord.tmp.ttl
 
-HUMEregister.rdf.xml: HUMEregister.xml
-	zorba -i convert.xq >| HUMEregister.rdf.xml
+humord.rdf.xml: humord.xml
+	zorba -i convert.xq >| humord.rdf.xml
 
-HUMEregister.xml:
-	wget -nv http://www.bibsys.no/files/out/humordsok/HUMEregister.xml
+humord.xml:
+	wget -nv -O humord.xml http://www.bibsys.no/files/out/humordsok/HUMEregister.xml
 
 clean:
 	rm -f skosify.log
-	rm -f HUMEregister.rdf.xml
-	rm -f HUMEregister.ttl
-	rm -f HUMEregister.tmp.ttl
-	rm -f HUMEregister.xml
+	rm -f humord.rdf.xml
+	rm -f humord.ttl
+	rm -f humord.tmp.ttl
+	rm -f humord.xml

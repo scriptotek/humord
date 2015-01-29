@@ -2,7 +2,7 @@
 
 <nodes>
 {
-	for $x in distinct-values(doc('HUMEregister.xml')//*/name())
+	for $x in distinct-values(doc('humord.xml')//*/name())
 	return element {$x} {''}
 }
 </nodes>

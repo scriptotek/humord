@@ -4,11 +4,11 @@
 
 [HUMORD](http://www.bibsys.no/files/out/humord/) er en emnetesaurus som
 vedlikeholdes i BIBSYS' emnemodul, og eksporteres som XML hver mandag
-til <http://www.bibsys.no/files/out/humordsok/HUMEregister.xml>
+til <http://www.bibsys.no/files/out/humordsok/humord.xml>
 
-* `HUMEregister.xml` : Registeret som eksportert fra BIBSYS' emnemodul.
-* `HUMEregister.ttl` : Registeret konvertert til RDF og serialisert som Turtle.
-* `convert.xq` : XQuery-script for å konvertere `HUMEregister.xml` til RDF.
+* `humord.xml` : Registeret som eksportert fra BIBSYS' emnemodul.
+* `humord.ttl` : Registeret konvertert til RDF og serialisert som Turtle.
+* `convert.xq` : XQuery-script for å konvertere `humord.xml` til RDF.
 
 ### Konverteringsprosessen
 
@@ -95,12 +95,12 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
 
 XQuery-scriptet kan kjøres med f.eks. [Zorba](http://www.zorba.io/):
 
-    $ zorba -i convert.xq >| HUMEregister.rdf.xml
+    $ zorba -i convert.xq >| humord.rdf.xml
 
 Konvertering fra RDF/XML til RDF/Turtle kan gjøres med f.eks.
 [Rapper](http://librdf.org/raptor/rapper.html):
 
-    $ rapper -i rdfxml -o turtle HUMEregister.rdf.xml >| HUMEregister.ttl
+    $ rapper -i rdfxml -o turtle humord.rdf.xml >| humord.ttl
 
 Har du Zorba og installert kan du kjøre `make clean && make` for å hente
 en ny XML fra Bibsys, og utføre begge kommandoene ovenfor.
@@ -111,7 +111,7 @@ Hver mandag klokka 12:
 ```
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/zorba-3.0/bin
 
-0 12 * * 1 cd /projects/datakilder/humord && ./publish.sh 2>&1 | tee out.log
+0 12 * * 1 /projects/datakilder/tools/publish.sh humord 2>&1
 ```
 
 ### Lisens
