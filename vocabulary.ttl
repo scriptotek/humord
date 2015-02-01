@@ -4,6 +4,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix lexvo: <http://lexvo.org/id/iso639-3/> .
+@prefix bs: <http://data.ub.uio.no/onto/bs#> .
 
 <http://data.ub.uio.no/humord/> a skos:ConceptScheme ;
     rdfs:label "Humord"@nb ;

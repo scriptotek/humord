@@ -81,9 +81,13 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
   fjerner vi oss fra SKOS som modell, men det går selvfølgelig an å tilby en
   genere både en isothes-basert RDF og en SKOS-basert RDF.
 
-* **Type** (`<type>`) ignoreres foreløpig, og postene behandles som andre poster.
-  Vi har 132 knutetermer (type=K) og 175 fasettindikatorer (type=F).
-  Må diskuteres om vi skal behandle disse spesielt.
+* **Type** (`<type>`): Vi har 132 knutetermer (type=K) og 175 fasettindikatorer (type=F).
+  Uklart hvordan disse skal behandles. Som en midlertid løsning legger vi på
+  `rdf:type bs:KnuteTerm` eller `rdf:type bs:FasettIndikator` så de enkelt kan identifiseres.
+  Eksempel:
+  ```turtle
+  <http://data.ub.uio.no/humord/00008> a bs:KnuteTerm, skos:Concept ;
+  ```
 
 * **Toppterm** (`<toppterm-id>`) ignoreres foreløpig. SKOS tillater kun ett
   toppbegrep per tesaurus (`skos:ConceptScheme`), gitt som `skos:topConceptOf`
