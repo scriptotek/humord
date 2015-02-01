@@ -29,6 +29,7 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
   ```turtle
   <http://data.ub.uio.no/humord/<term-id> a skos:Concept
       skos:prefLabel "<hovedemnefrase> (<kvalifikator)>"@nb
+      skos:inScheme <http://data.ub.uio.no/humord/>
       dcterms:identifier "<term-id>"
       dcterms:modified "<dato>"^^xs:date
       skos:definition "<definisjon>"@nb
@@ -39,6 +40,8 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
       skos:broader <http://data.ub.uio.no/humord/<ox-id>
       skos:related <http://data.ub.uio.no/humord/<se-ogsa-id>
   ```
+
+
 
 #### Merknader og åpne spørsmål
 
