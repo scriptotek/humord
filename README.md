@@ -89,12 +89,8 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
   <http://data.ub.uio.no/humord/00008> a bs:KnuteTerm, skos:Concept ;
   ```
 
-* **Toppterm** (`<toppterm-id>`) ignoreres foreløpig. SKOS tillater kun ett
-  toppbegrep per tesaurus (`skos:ConceptScheme`), gitt som `skos:topConceptOf`
-  / `skos:hasTopConcept`. Én mulig løsning kunne vært å delt opp Humord i
-  flere mikrotesaurier med hvert sitt toppbegrep, men det finnes hele 8095
-  ulike toppbegrep, og det virker ikke som noen god løsning å lage 80895
-  mikrotesaurier. Må diskuteres.
+* **Topptermer** (`<toppterm-id>`): Legger til `skos:topConceptOf <http://data.ub.uio.no/humord/>`.
+ Humord har 26 stk. I XML-filen fra Bibsys har disse i tillegg en hierarkisk relasjon til HUME00001, men denne ignoreres i konverteringen. Toppbegreper med overordnede blir for dumt :)
 
 * **Underemnefrase** (`<underemnefrase>`) er ikke brukt i HUMORD.
 
