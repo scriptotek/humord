@@ -1,7 +1,7 @@
 import module namespace emneregister="http://ub.uio.no/emneregister"
   at "../emneregister.xq";
 
-declare variable $scheme := 'http://data.ub.uio.no/humord/';
+declare variable $scheme := 'http://data.ub.uio.no/humord';
 declare variable $uri_base := 'http://data.ub.uio.no/humord/c';
 
 

@@ -1,16 +1,53 @@
+@base <http://data.ub.uio.no/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix lexvo: <http://lexvo.org/id/iso639-3/> .
 @prefix bs: <http://data.ub.uio.no/onto/bs#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 
-<http://data.ub.uio.no/humord/> a skos:ConceptScheme ;
+<humord> a skos:ConceptScheme ;
     rdfs:label "Humord"@nb ;
-    cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
-    dcterms:creator "University Library of Oslo"@en,
-                "Universitetsbiblioteket i Oslo"@nb ;
-    dcterms:description "Humord is a Norwegian thesaurus for the subject areas humanities and social sciences."@en,
+    dct:description "Humord is a Norwegian thesaurus for the subject areas humanities and social sciences."@en,
         "Humord er en norsk tesaurus for humaniora og samfunnsvitenskap med tilgrensende fagområder."@nb ;
-    dcterms:language lexvo:nob .
+    dct:creator <corp/UBO> ;
+    dct:language lexvo:nob ;
+    cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    dct:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    dct:modified "2015-02-23"^^xsd:date ;
+    void:sparqlEndpoint <sparql> ;
+    void:dataDump <dumps/humord.rdf>,
+        <dumps/humord.ttl> ;
+    void:uriSpace "http://data.ub.uio.no/humord/" ;
+    void:exampleResource <humord/c05316> ;
+    void:vocabulary skos: .
+
+<corp/UBO> a foaf:Organization ;
+    rdfs:label "University of Oslo Library"@en,
+        "Universitetsbiblioteket i Oslo"@nb ;
+    owl:sameAs <http://dbpedia.org/resource/University_Library_of_Oslo>,
+        <http://viaf.org/viaf/155670338/>,
+        <http://www.wikidata.org/entity/Q3354774> .
+
+<sparql> a sd:Service ;
+    sd:url <sparql> ;
+    sd:supportedLanguage sd:SPARQL11Query ;
+    sd:feature sd:UnionDefaultGraph ;
+    sd:defaultDataset <sparql/dataset> .
+
+<sparql/dataset> a sd:Dataset ;
+    dct:title "data.ub.uio.no" ;
+    dct:description "Open datasets at the University of Oslo Library"@en ;
+    sd:defaultGraph <sparql/graphs/default> ;
+    sd:namedGraph <sparql/graphs/humord> .
+
+<sparql/graphs/default> a sd:Graph .
+
+<sparql/graphs/humord> a sd:NamedGraph ;
+    sd:name <humord> ;
+    sd:graph <humord> .
