@@ -10,6 +10,7 @@
 @prefix bs: <http://data.ub.uio.no/onto/bs#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix isothes: <http://purl.org/iso25964/skos-thes#> .
 
 <humord> a skos:ConceptScheme ;
     rdfs:label "Humord"@nb ;

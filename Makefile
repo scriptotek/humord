@@ -8,13 +8,14 @@ humord.ttl: humord.tmp.ttl
 	rm -f humord.tmp.ttl
 
 humord.tmp.ttl: humord.rdf.xml
-	rapper -i rdfxml -o turtle humord.rdf.xml >| humord.tmp.ttl
+	# update is part of jena/arq
+	update --update=fix-thesaurusarray.ru --data=humord.rdf.xml --dump > humord.tmp.ttl
 
 humord.rdf.xml: humord.xml
 	zorba -i convert.xq >| humord.rdf.xml
 
 humord.xml:
-	wget -nv -O humord.xml http://www.bibsys.no/files/out/humordsok/HUMEregister.xml
+	curl -s -o humord.xml http://www.bibsys.no/files/out/humordsok/HUMEregister.xml
 
 clean:
 	rm -f skosify.log
