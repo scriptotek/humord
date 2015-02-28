@@ -32,7 +32,7 @@
     rdfs:label "University of Oslo Library"@en,
         "Universitetsbiblioteket i Oslo"@nb ;
     owl:sameAs <http://dbpedia.org/resource/University_Library_of_Oslo>,
-        <http://viaf.org/viaf/155670338/>,
+        <http://viaf.org/viaf/155670338>,
         <http://www.wikidata.org/entity/Q3354774> .
 
 <sparql> a sd:Service ;
