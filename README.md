@@ -110,12 +110,17 @@ en ny XML fra Bibsys, og utføre begge kommandoene ovenfor.
 
 ### Oppdatering
 
-Hver mandag klokka 12:
-```
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/zorba-3.0/bin
+Bibsys legger ut oppdatert Humord-XML hver mandag klokka 07 UTC.
+0715 henter vi filen, konverterer til RDF, gjør en commit og dytter til utv.uio.no.
 
-0 12 * * 1 /projects/datakilder/tools/publish.sh humord 2>&1
-```
+    PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/zorba-3.0/bin
+    15 7 * * 1 cd /projects/datakilder && ./tools/publish.sh humord 2>&1 | tee out.log
+
+0730 oppdaterer vi Fuseki på en annen maskin. I crontab settes `RUBYENV` til verdien
+fra `rvm env --path`:
+
+    RUBYENV=/usr/local/rvm/environments/ruby-1.9.3-p551@global
+    30 7 * * 1 cd /opt/datakilder && git pull uio master && ./tools/update-fuseki.sh humord
 
 ### Lisens
 
