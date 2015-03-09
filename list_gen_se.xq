@@ -6,8 +6,11 @@ xquery version "3.0";
 declare function local:term($posts as element()*, $token as xs:string)
 as element()*
 {
-    let $token2 := tokenize($token, ' \(')[1]
-    let $rlp := $posts/post[hovedemnefrase = $token2]
+    let $splitted := tokenize($token, ' \(')
+	let $tlp := if (count($splitted) = 2) then
+	    $posts/post[hovedemnefrase = $splitted[0] and kvalifikator = $splitted[1]]
+	else
+	    $posts/post[hovedemnefrase = $splitted[0] and not(exists(kvalifikator))]
     return if ($rlp/se-id) then
         $posts/post[term-id = $rlp/se-id][1]
     else
