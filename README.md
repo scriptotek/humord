@@ -112,8 +112,9 @@ en ny XML fra Bibsys, og utføre begge kommandoene ovenfor.
 
 Bibsys legger ut oppdatert Humord-XML hver mandag klokka 07 UTC.
 0715 henter vi filen, konverterer til RDF, gjør en commit og dytter til utv.uio.no.
+(Zorba og Jena må ligge i PATH)
 
-    PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/zorba-3.0/bin
+    PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/zorba-3.0/bin:/data/apache-jena-2.10.0/bin/
     15 7 * * 1 cd /projects/datakilder && ./tools/publish.sh humord 2>&1 | tee out.log
 
 0730 oppdaterer vi Fuseki på en annen maskin. I crontab settes `RUBYENV` til verdien
