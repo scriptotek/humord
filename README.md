@@ -8,7 +8,13 @@ til <http://www.bibsys.no/files/out/humordsok/humord.xml>
 
 * `humord.xml` : Registeret som eksportert fra BIBSYS' emnemodul.
 * `humord.ttl` : Registeret konvertert til RDF og serialisert som Turtle.
-* `convert.xq` : XQuery-script for å konvertere `humord.xml` til RDF.
+
+### Konvertering
+
+Har du Zorba installert kan du kjøre
+
+- `make clean && make` for å hente en ny XML fra Bibsys og konvertere til RDF.
+- `make solr` for å generere JSON-dokumenter til indeksering i SOLR fra Turtle-filene.
 
 ### Konverteringsprosessen
 
@@ -93,20 +99,6 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
  Humord har 26 stk. I XML-filen fra Bibsys har disse i tillegg en hierarkisk relasjon til HUME00001, men denne ignoreres i konverteringen. Toppbegreper med overordnede blir for dumt :)
 
 * **Underemnefrase** (`<underemnefrase>`) er ikke brukt i HUMORD.
-
-### Bruk:
-
-XQuery-scriptet kan kjøres med f.eks. [Zorba](http://www.zorba.io/):
-
-    $ zorba -i convert.xq >| humord.rdf.xml
-
-Konvertering fra RDF/XML til RDF/Turtle kan gjøres med f.eks.
-[Rapper](http://librdf.org/raptor/rapper.html):
-
-    $ rapper -i rdfxml -o turtle humord.rdf.xml >| humord.ttl
-
-Har du Zorba og installert kan du kjøre `make clean && make` for å hente
-en ny XML fra Bibsys, og utføre begge kommandoene ovenfor.
 
 ### Oppdatering
 
