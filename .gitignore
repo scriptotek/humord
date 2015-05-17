@@ -1,4 +1,7 @@
 humord.rdf.xml
 *.log
 humord.xml
+humord.tmp.ttl
+humord_solr.json
 skosify.log
+tools
