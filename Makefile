@@ -1,35 +1,44 @@
-.PHONY: rdf solr clean toolsupdate
 .DEFAULT_GOAL := rdf
+.PHONY: rdf solr toolsupdate clean
 
-rdf: data/humord.ttl
-solr: solr/humord.json
+gitmaster := ./tools/.git/refs/heads/master
+basename = data/humord
+
+# If make does create b in order to update something else, it deletes
+# b later on after it is no longer needed.
+.INTERMEDIATE: $(basename).rdf.xml $(basename).tmp.ttl
+
+rdf: toolsupdate $(basename).ttl
+solr: toolsupdate solr/humord.json
 
 tools:
 	git clone https://github.com/danmichaelo/ubdata-tools.git tools
 
-toolsupdate:
-	cd tools && git pull && cd ..
+toolsupdate: tools
+	cd ./tools && git pull && cd ..
+	# touch ./tools/.git/refs/heads/master
 
-data/humord.ttl: data/humord.tmp.ttl toolsupdate
+$(basename).ttl: $(basename).tmp.ttl $(gitmaster)
 	rm -f skosify.log
-	python ./tools/skosify-sort.py -b 'http://data.ub.uio.no/' -o ./data/humord.ttl vocabulary.ttl ./data/humord.tmp.ttl
+	python ./tools/skosify-sort.py -b 'http://data.ub.uio.no/' -o $@ vocabulary.ttl $(basename).tmp.ttl
 
-data/humord.tmp.ttl: data/humord.rdf.xml
-	# update is part of jena/arq
-	update --update=fix-thesaurusarray.ru --data=./data/humord.rdf.xml --dump > ./data/humord.tmp.ttl
+# update is part of jena/arq
+$(basename).tmp.ttl: $(basename).rdf.xml
+	update --update=fix-thesaurusarray.ru --data=$(basename).rdf.xml --dump > $@
 
-data/humord.rdf.xml: data/humord.xml toolsupdate
-	zorba -i ./tools/emneregister2rdf.xq -e "base:=hume" -e "scheme:=http://data.ub.uio.no/humord" -e "file:=../data/humord.xml" >| ./data/humord.rdf.xml
+$(basename).rdf.xml: $(basename).xml $(gitmaster)
+	zorba -i ./tools/emneregister2rdf.xq -e "base:=hume" -e "scheme:=http://data.ub.uio.no/humord" \
+	  -e "file:=../$(basename).xml" >| $@
 
-data/humord.xml:
-	curl -s -o ./data/humord.xml http://www.bibsys.no/files/out/humordsok/HUMEregister.xml
+$(basename).xml:
+	curl -s -o $@ http://www.bibsys.no/files/out/humordsok/HUMEregister.xml
 
-solr/humord.json: rdf toolsupdate
-	python ./tools/ttl2solr.py -v ./data/humord.ttl ./solr/humord.json
+solr/humord.json: $(basename).ttl $(gitmaster)
+	python ./tools/ttl2solr.py -v $(basename).ttl $@
 
 clean:
-	rm -f ./skosify.log
-	rm -f ./data/humord.rdf.xml
-	rm -f ./data/humord.ttl
-	rm -f ./data/humord.tmp.ttl
-	rm -f ./data/humord.xml
+	rm -f skosify.log
+	rm -f $(basename).rdf.xml
+	rm -f $(basename).ttl
+	rm -f $(basename).tmp.ttl
+	rm -f $(basename).xml
