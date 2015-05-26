@@ -81,15 +81,38 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
       isothes:plusUF <:10249>
       isothes:plusUse <:9767>, <:3680>
   ```
-  Merk at verdimengden for `isothes:plusUse` er `isothes:PreferredTerm`
-  (en utvidelse av `skosxl:Label`), ikke `skos:Concept`, så vi kan ikke bare
-  ta dette i bruk uten å ta i bruk resten av isothes-modellen også. Isåfall
-  fjerner vi oss fra SKOS som modell, men det går selvfølgelig an å tilby en
-  genere både en isothes-basert RDF og en SKOS-basert RDF.
+  Merk at dette er relasjoner mellom termer, ikke begreper, så det representerer
+  et ganske markant brudd med SKOS-modellen. Men det går selvfølgelig an å tilby
+  både en isothes-basert RDF og en SKOS-basert RDF.
 
-* **Type** (`<type>`): Vi har 132 knutetermer (type=K) og 175 fasettindikatorer (type=F).
-  Uklart hvordan disse skal behandles. Som en midlertid løsning legger vi på
-  `rdf:type bs:KnuteTerm` eller `rdf:type bs:FasettIndikator` så de enkelt kan identifiseres.
+* **Fasettindikatorer**: Vi har 175 slike (`<type>F</type>`). Disse mappes til `isothes:ThesaurusArray` og `skos:Collection`.
+  Eksempel:
+
+  ```turtle
+  <humord/c00102> a isothes:ThesaurusArray,
+        skos:Collection ;
+    dct:identifier "HUME00102" ;
+    dct:modified "1994-03-21"^^xsd:date ;
+    skos:inScheme <humord> ;
+    skos:member <humord/c00103>,
+        <humord/c00105>,
+        <humord/c00106>,
+        <humord/c00107>,
+        <humord/c00109>,
+        <humord/c16312>,
+        <humord/c18224>,
+        <humord/c19001>,
+        <humord/c19427>,
+        <humord/c25561>,
+        <humord/c25928>,
+        <humord/c27930> ;
+    skos:prefLabel "(arkeologi etter type)"@nb .
+  ```
+  (Foreløpig uløst problem: `dct:modified` reflekterer ikke når det sist ble gjort endringer i medlemslisten.)
+
+* **Knutetermer** (hjelpetermer): Vi har 132 slike (`<type>K</type>`). Disse brukes ikke i indeksering, bare for å "knytte hierarkier sammen".
+  De konverteres som vanlig, men får `rdf:type bs:KnuteTerm` så de enkelt kan identifiseres ved behov.
+
   Eksempel:
   ```turtle
   <http://data.ub.uio.no/humord/00008> a bs:KnuteTerm, skos:Concept ;
