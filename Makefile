@@ -13,9 +13,11 @@ solr: toolsupdate solr/humord.json
 
 tools:
 	git clone https://github.com/danmichaelo/ubdata-tools.git tools
+	pip install -U -r tools/requirements.txt
 
 toolsupdate: tools
 	cd ./tools && git pull && cd ..
+	pip install -U -r tools/requirements.txt
 	# touch ./tools/.git/refs/heads/master
 
 $(basename).ttl: $(basename).tmp.ttl $(gitmaster)
