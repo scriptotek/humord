@@ -1,3 +1,4 @@
 *.log
 tools
 solr/humord.json
+*.zip

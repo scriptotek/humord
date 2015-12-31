@@ -1,20 +1,35 @@
 ## HUMORD
 
+[HUMORD](http://www.bibsys.no/files/out/humord/) is a subject thesaurus
+maintained in BIBSYS' emnemodul and exported as XML to
+<http://www.bibsys.no/files/out/humordsok/humord.xml> every Monday morning.
+
 ### Innhold
 
-[HUMORD](http://www.bibsys.no/files/out/humord/) er en emnetesaurus som
-vedlikeholdes i BIBSYS' emnemodul, og eksporteres som XML hver mandag
-til <http://www.bibsys.no/files/out/humordsok/humord.xml>
+Contents of this repo:
 
-* `humord.xml` : Registeret som eksportert fra BIBSYS' emnemodul.
-* `humord.ttl` : Registeret konvertert til RDF og serialisert som Turtle.
+* `src/humord.xml` : Source data from BIBSYS' emnemodul.
+* `humord.json` : Converted to RoaldIII JSON.
+* `dist/humord.ttl` : Converted to RDF Turtle, with mappings mixed in.
+* `dist/humord.marc21.xml` : Converted to MARC21 XML, with DDC mappings mixed in.
 
-### Konvertering
+### Conversion
 
-Har du Zorba installert kan du kjøre
+Authority data is currently maintained in Bibsys and converted to
+JSON (RoaldIII data model) using [RoaldIII](https://github.com/realfagstermer/roald).
+RoaldIII is also used to mix in mappings before exporting
+RDF/SKOS and MARC21.
 
-- `make clean && make` for å hente en ny XML fra Bibsys og konvertere til RDF.
-- `make solr` for å generere JSON-dokumenter til indeksering i SOLR fra Turtle-filene.
+The conversion is done by running `python publish.py`, which only
+runs a conversion if any of the source files have changed. You
+can run `python publish.py -f` to force a conversion even if no
+source files have changed (useful during development).
+
+Please see the RoaldIII repo for more details on the conversion.
+
+The RoaldIII JSON data is found in `humord.json`.
+Complete, distributable RDF/SKOS and MARC21 files are found in the
+`dist` folder. These includes mappings.
 
 ### Konverteringsprosessen
 
@@ -124,6 +139,8 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
 * **Underemnefrase** (`<underemnefrase>`) er ikke brukt i HUMORD.
 
 ### Oppdatering
+
+*(UTDATERT)*
 
 Bibsys legger ut oppdatert Humord-XML hver mandag klokka 07 UTC.
 0715 henter vi filen, konverterer til RDF, gjør en commit og dytter til utv.uio.no.
