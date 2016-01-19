@@ -13,7 +13,6 @@
 @prefix realfagstermer: <http://data.ub.uio.no/realfagstermer/> .
 @prefix tekord: <http://ntnu.no/ub/data/tekord#> .
 @prefix humord: <http://data.ub.uio.no/humord/> .
-@prefix ddc: <http://data.ub.uio.no/ddc/> .
 @prefix library: <http://data.ub.uio.no/library/> .
 @prefix mads: <http://www.loc.gov/mads/rdf/v1#> .
 
