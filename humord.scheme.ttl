@@ -24,6 +24,8 @@ humord: a skos:ConceptScheme ;
     dct:language lexvo:nob ;
     cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     dct:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    dct:type <http://purl.org/dc/dcmitype/Dataset>,
+        <http://w3id.org/nkos/nkostype#thesaurus> ;
     dct:modified "2015-02-23"^^xsd:date ;
     void:sparqlEndpoint <http://data.ub.uio.no/sparql> ;
     void:dataDump <http://data.ub.uio.no/dumps/humord.rdf>,
