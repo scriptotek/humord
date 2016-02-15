@@ -20,10 +20,10 @@ JSON (RoaldIII data model) using [RoaldIII](https://github.com/realfagstermer/ro
 RoaldIII is also used to mix in mappings before exporting
 RDF/SKOS and MARC21.
 
-The conversion is done by running `python publish.py`, which only
-runs a conversion if any of the source files have changed. You
-can run `python publish.py -f` to force a conversion even if no
-source files have changed (useful during development).
+* `pip install -r requirements.txt` to install dependencies needed for the conversion.
+* `doit build` to do the actual conversion. This only runs if any of the source files
+have changed or any of the target files are missing. To force a conversion even if no
+files have changed, run `doit forget build && doit build` (useful during development).
 
 Please see the RoaldIII repo for more details on the conversion.
 

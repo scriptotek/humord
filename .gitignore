@@ -2,3 +2,7 @@
 tools
 solr/humord.json
 *.zip
+*.db
+*.bz2
+*.etag
+dumps/
