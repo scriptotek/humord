@@ -32,6 +32,8 @@ def task_fetch():
             'git config user.name "ubo-bot"',
             'git config user.email "danmichaelo+ubobot@gmail.com"',
             'git pull',
+            'git config --unset user.name',
+            'git config --unset user.email',
         ]
     }
     for file in [
@@ -77,7 +79,7 @@ def task_build():
         # 1) MARC21
         marc21options = {
             'vocabulary_code': 'humord',
-            'created_by': 'NoOU',
+            'created_by': 'No-TrBIB',
             'mappings_from': ['src/lambda.rdf']
         }
         roald.export('dist/%s.marc21.xml' %
