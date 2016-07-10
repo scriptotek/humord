@@ -11,3 +11,4 @@ dist/humord.marc21.xml
 humord.json
 *.rdf
 dist/humord.complete.ttl
+src/ub-onto.ttl
