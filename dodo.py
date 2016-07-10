@@ -43,6 +43,10 @@ def task_fetch():
         {
             'remote': 'https://lambda.biblionaut.net/export.rdf',
              'local': 'src/lambda.rdf'
+        },
+        {
+            'remote': 'https://rawgit.com/scriptotek/data_ub_ontology/master/ub-onto.ttl',
+             'local': 'src/ub-onto.ttl'
         }
     ]:
         yield {
@@ -68,7 +72,7 @@ def task_build():
 
         includes = [
             '%s.scheme.ttl' % config['basename'],
-            'ubo-onto.ttl'
+            'src/ub-onto.ttl'
         ]
 
         mappings = [
@@ -106,7 +110,7 @@ def task_build():
         'file_dep': [
             'src/humord.xml',
             'src/lambda.rdf',
-            'ubo-onto.ttl',
+            'src/ub-onto.ttl',
             '%s.scheme.ttl' % config['basename']
         ],
         'targets': [
