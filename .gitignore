@@ -7,3 +7,7 @@ solr/humord.json
 *.pyc
 *.etag
 dumps/
+dist/humord.marc21.xml
+humord.json
+*.rdf
+dist/humord.complete.ttl
