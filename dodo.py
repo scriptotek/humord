@@ -7,7 +7,7 @@ import logging.config
 logging.config.fileConfig('logging.cfg', )
 logger = logging.getLogger(__name__)
 
-from data_ub_tasks import gen_solr_json
+import data_ub_tasks
 
 config = {
     'dumps_dir': get_var('dumps_dir', '/opt/data.ub/www/default/dumps'),
@@ -182,7 +182,7 @@ def task_build_extras():
 
 
 def task_build_json():
-    return gen_solr_json(config, 'humord')
+    return data_ub_tasks.gen_solr_json(config, 'humord')
 
 
 def task_git_push():
