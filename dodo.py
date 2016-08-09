@@ -122,6 +122,10 @@ def task_build():
     }
 
 
+def task_build_json():
+    return data_ub_tasks.gen_solr_json(config, 'humord')
+
+
 def task_git_push():
     return data_ub_tasks.git_push_task_gen(config)
 
