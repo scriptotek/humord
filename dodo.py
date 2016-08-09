@@ -7,7 +7,7 @@ import logging.config
 logging.config.fileConfig('logging.cfg', )
 logger = logging.getLogger(__name__)
 
-import data_ub_tasks
+from data_ub_tasks import gen_solr_json
 
 config = {
     'dumps_dir': get_var('dumps_dir', '/opt/data.ub/www/default/dumps'),
@@ -18,11 +18,11 @@ config = {
 }
 
 
-def task_fetch():
+def task_fetch_core():
 
     yield {
-        'doc': 'Fetch remote files that have changed',
-        'basename': 'fetch',
+        'doc': 'Fetch remote core files that have changed',
+        'basename': 'fetch-core',
         'name': None
     }
     yield {
@@ -41,10 +41,6 @@ def task_fetch():
              'local': 'src/humord.xml'
         },
         {
-            'remote': 'https://lambda.biblionaut.net/export.rdf',
-             'local': 'src/lambda.rdf'
-        },
-        {
             'remote': 'https://rawgit.com/scriptotek/data_ub_ontology/master/ub-onto.ttl',
              'local': 'src/ub-onto.ttl'
         }
@@ -59,15 +55,86 @@ def task_fetch():
         }
 
 
-def task_build():
+def task_fetch_extras():
 
-    def build_dist(task):
-        logger.info('Building new dist')
+    yield {
+        'doc': 'Fetch remote extra files that have changed',
+        'basename': 'fetch-extras',
+        'name': None
+    }
+    for file in [
+        {
+            'remote': 'https://lambda.biblionaut.net/export.rdf',
+             'local': 'src/lambda.rdf'
+        }
+    ]:
+        yield {
+            'name': file['local'],
+            'actions': [(data_ub_tasks.fetch_remote, [], {
+                'remote': file['remote'],
+                'etag_cache': '{}.etag'.format(file['local'])
+            })],
+            'targets': [file['local']]
+        }
+
+
+def task_build_core():
+
+    def build(task):
+        logger.info('Building new core dist')
         roald = Roald()
         roald.load('src/humord.xml', format='bibsys', language='nb')
         roald.set_uri_format(
             'http://data.ub.uio.no/%s/c{id}' % config['basename'])
         roald.save('%s.json' % config['basename'])
+        logger.info('Wrote %s.json', config['basename'])
+
+        includes = [
+            '%s.scheme.ttl' % config['basename'],
+            'src/ub-onto.ttl'
+        ]
+
+        # 1) MARC21
+        # marc21options = {
+        #     'vocabulary_code': 'humord',
+        #     'created_by': 'No-TrBIB',
+        #     'mappings_from': ['src/lambda.rdf']
+        # }
+        # roald.export('dist/%s.marc21.xml' %
+        #              config['basename'], format='marc21', **marc21options)
+        # logger.info('Wrote dist/%s.marc21.xml', config['basename'])
+
+        # 2) RDF (core)
+        roald.export('dist/%s.ttl' % config['basename'],
+                     format='rdfskos',
+                     include=includes
+                     )
+        logger.info('Wrote dist/%s.core.ttl', config['basename'])
+
+    return {
+        'doc': 'Build distribution files (RDF/SKOS + MARC21XML) from source files',
+        'basename': 'build-core',
+        'actions': [build],
+        'file_dep': [
+            'src/humord.xml',
+            'src/ub-onto.ttl',
+            '%s.scheme.ttl' % config['basename']
+        ],
+        'targets': [
+            '%s.json' % config['basename'],
+            'dist/%s.ttl' % config['basename'],
+        ]
+    }
+
+
+def task_build_extras():
+
+    def build(task):
+        logger.info('Building extras')
+        roald = Roald()
+        roald.load('src/humord.xml', format='bibsys', language='nb')
+        roald.set_uri_format(
+            'http://data.ub.uio.no/%s/c{id}' % config['basename'])
         logger.info('Wrote %s.json', config['basename'])
 
         includes = [
@@ -89,13 +156,6 @@ def task_build():
                      config['basename'], format='marc21', **marc21options)
         logger.info('Wrote dist/%s.marc21.xml', config['basename'])
 
-        # 2) RDF (core)
-        roald.export('dist/%s.ttl' % config['basename'],
-                     format='rdfskos',
-                     include=includes
-                     )
-        logger.info('Wrote dist/%s.core.ttl', config['basename'])
-
         # 3) RDF (core + mappings)
         roald.export('dist/%s.complete.ttl' % config['basename'],
                      format='rdfskos',
@@ -106,7 +166,8 @@ def task_build():
 
     return {
         'doc': 'Build distribution files (RDF/SKOS + MARC21XML) from source files',
-        'actions': [build_dist],
+        'basename': 'build-extras',
+        'actions': [build],
         'file_dep': [
             'src/humord.xml',
             'src/lambda.rdf',
@@ -114,16 +175,14 @@ def task_build():
             '%s.scheme.ttl' % config['basename']
         ],
         'targets': [
-            '%s.json' % config['basename'],
             'dist/%s.marc21.xml' % config['basename'],
-            'dist/%s.ttl' % config['basename'],
             'dist/%s.complete.ttl' % config['basename']
         ]
     }
 
 
 def task_build_json():
-    return data_ub_tasks.gen_solr_json(config, 'humord')
+    return gen_solr_json(config, 'humord')
 
 
 def task_git_push():
