@@ -125,8 +125,12 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
   ```
   (Foreløpig uløst problem: `dct:modified` reflekterer ikke når det sist ble gjort endringer i medlemslisten.)
 
+  I MARC21-representasjonen får de `008/15 = "b"` for å markere at disse ikke skal brukes i emneinnførsler,
+  og `008/09 = "e"` for å markere at de er fasettindikatorer ("node label").
+
 * **Knutetermer** (hjelpetermer): Vi har 132 slike (`<type>K</type>`). Disse brukes ikke i indeksering, bare for å "knytte hierarkier sammen".
   De konverteres som vanlig, men får `rdf:type bs:KnuteTerm` så de enkelt kan identifiseres ved behov.
+  I MARC21-representasjonen får de `008/15 = "b"` for å markere at disse ikke skal brukes i emneinnførsler.
 
   Eksempel:
   ```turtle
