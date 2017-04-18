@@ -30,7 +30,7 @@ def task_fetch_core():
     yield data_ub_tasks.git_pull_task_gen(config)
     for file in [
         {
-            'remote': 'http://www.bibsys.no/files/out/humordsok/HUMEregister.xml',
+            'remote': 'http://wgate.bibsys.no/HUMEregister.xml',
              'local': 'src/humord.xml'
         },
         {
