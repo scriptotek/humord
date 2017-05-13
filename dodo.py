@@ -57,10 +57,10 @@ def task_fetch_extras():
         'name': None
     }
     for file in [
-        {
-            'remote': 'https://lambda.biblionaut.net/export.rdf',
-             'local': 'src/lambda.rdf'
-        }
+        {'remote': 'https://lambda.biblionaut.net/real_hume.rdf',
+            'local': 'src/hume.rdf'},
+        {'remote': 'https://lambda.biblionaut.net/ccmapper_ddc.rdf',
+            'local': 'src/ddc.rdf'},
     ]:
         yield {
             'name': file['local'],
@@ -137,14 +137,18 @@ def task_build_extras():
         ]
 
         mappings = [
-            'src/lambda.rdf'
+            'src/hume.rdf',
+            'src/ddc.rdf',
         ]
 
         # 1) MARC21
         marc21options = {
             'vocabulary_code': 'humord',
             'created_by': 'No-TrBIB',
-            'mappings_from': ['src/lambda.rdf']
+            'mappings_from': [
+                'src/hume.rdf',
+                'src/ddc.rdf',
+            ]
         }
         roald.export('dist/%s.marc21.xml' %
                      config['basename'], format='marc21', **marc21options)
@@ -164,7 +168,8 @@ def task_build_extras():
         'actions': [build],
         'file_dep': [
             'src/humord.xml',
-            'src/lambda.rdf',
+            'src/hume.rdf',
+            'src/ddc.rdf',
             'src/ub-onto.ttl',
             '%s.scheme.ttl' % config['basename']
         ],
