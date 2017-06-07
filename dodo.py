@@ -17,6 +17,7 @@ config = {
     'basename': 'humord',
     'git_user': 'ubo-bot',
     'git_email': 'danmichaelo+ubobot@gmail.com',
+    'es_index': 'authority'
 }
 
 
@@ -198,3 +199,7 @@ def task_publish_dumps():
 
 def task_fuseki():
     return data_ub_tasks.fuseki_task_gen(config, ['dist/%(basename)s.complete.ttl'])
+
+
+def task_elasticsearch():
+    return data_ub_tasks.gen_elasticsearch(config, 'humord')
