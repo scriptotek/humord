@@ -20,6 +20,14 @@ config = {
     'es_index': 'authority'
 }
 
+DOIT_CONFIG = {
+    'default_tasks': [
+        'git-push',
+        'publish-dumps',
+        'fuseki',
+    ]
+}
+
 
 def task_fetch_core():
 
