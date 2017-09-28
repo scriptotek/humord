@@ -101,7 +101,6 @@ def task_build_core():
         # marc21options = {
         #     'vocabulary_code': 'humord',
         #     'created_by': 'No-TrBIB',
-        #     'mappings_from': ['src/lambda.rdf']
         # }
         # roald.export('dist/%s.marc21.xml' %
         #              config['basename'], format='marc21', **marc21options)
@@ -138,26 +137,18 @@ def task_build_extras():
         roald.load('src/humord.xml', format='bibsys', language='nb')
         roald.set_uri_format(
             'http://data.ub.uio.no/%s/c{id}' % config['basename'])
-        logger.info('Wrote %s.json', config['basename'])
+        roald.load('src/hume.rdf', format='skos')
+        roald.load('src/ddc.rdf', format='skos')
 
         includes = [
             '%s.scheme.ttl' % config['basename'],
             'src/ub-onto.ttl'
         ]
 
-        mappings = [
-            'src/hume.rdf',
-            'src/ddc.rdf',
-        ]
-
         # 1) MARC21
         marc21options = {
             'vocabulary_code': 'humord',
             'created_by': 'No-TrBIB',
-            'mappings_from': [
-                'src/hume.rdf',
-                'src/ddc.rdf',
-            ]
         }
         roald.export('dist/%s.marc21.xml' %
                      config['basename'], format='marc21', **marc21options)
@@ -167,7 +158,6 @@ def task_build_extras():
         roald.export('dist/%s.complete.ttl' % config['basename'],
                      format='rdfskos',
                      include=includes,
-                     mappings_from=mappings
                      )
         logger.info('Wrote dist/%s.complete.ttl', config['basename'])
 
