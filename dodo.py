@@ -1,12 +1,16 @@
 # encoding=utf8
-from doit import get_var
-from roald import Roald
 
 import logging
 import logging.config
-logging.config.fileConfig('logging.cfg', )
-logger = logging.getLogger(__name__)
+import yaml
 
+with open('logging.yml') as cfg:
+    logging.config.dictConfig(yaml.load(cfg))
+
+logger = logging.getLogger()
+
+from doit import get_var
+from roald import Roald
 import data_ub_tasks
 
 config = {
@@ -134,10 +138,13 @@ def task_build_extras():
     def build(task):
         logger.info('Building extras')
         roald = Roald()
+        logger.info(' - Loading humord.xml')
         roald.load('src/humord.xml', format='bibsys', language='nb')
         roald.set_uri_format(
-            'http://data.ub.uio.no/%s/c{id}' % config['basename'])
+            'http://data.ub.uio.no/%s/c{id}' % config['basename'], 'HUME')
+        logger.info(' - Loading mymapper mappings')
         roald.load('src/hume.rdf', format='skos')
+        logger.info(' - Loading ccmapper mappings')
         roald.load('src/ddc.rdf', format='skos')
 
         includes = [
