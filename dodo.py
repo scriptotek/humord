@@ -165,6 +165,7 @@ def task_build_extras():
         roald.export('dist/%s.complete.ttl' % config['basename'],
                      format='rdfskos',
                      include=includes,
+                     with_ccmapper_candidates=True,
                      )
         logger.info('Wrote dist/%s.complete.ttl', config['basename'])
 
