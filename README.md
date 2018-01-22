@@ -1,3 +1,7 @@
+[![License](https://img.shields.io/github/license/scriptotek/humord.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
+[![Build Status](https://travis-ci.org/scriptotek/humord.svg?branch=test-travis)](https://travis-ci.org/scriptotek/humord)
+[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/scriptotek/humord.svg)]()
+
 ## HUMORD
 
 [HUMORD](http://www.bibsys.no/files/out/humord/) is a subject thesaurus
