@@ -166,6 +166,7 @@ def task_build_extras():
                      format='rdfskos',
                      include=includes,
                      with_ccmapper_candidates=True,
+                     infer=True
                      )
         logger.info('Wrote dist/%s.complete.ttl', config['basename'])
 
