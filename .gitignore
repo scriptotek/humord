@@ -5,10 +5,6 @@ solr/humord.json
 *.db
 *.bz2
 *.pyc
-*.etag
 dumps/
-dist/humord.marc21.xml
+dist/
 humord.json
-*.rdf
-dist/humord.complete.ttl
-src/ub-onto.ttl

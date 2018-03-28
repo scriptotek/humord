@@ -62,10 +62,10 @@ def task_fetch_extras():
         'name': None
     }
     for file in [
-        {'remote': 'https://lambda.biblionaut.net/real_hume.rdf',
-            'local': 'src/hume.rdf'},
-        {'remote': 'https://lambda.biblionaut.net/ccmapper_ddc.rdf',
-            'local': 'src/ddc.rdf'},
+        {'remote': 'https://lambda.biblionaut.net/export/real_hume_mappings.ttl',
+            'local': 'src/real_hume_mappings.ttl'},
+        {'remote': 'https://lambda.biblionaut.net/export/ccmapper_mappings.ttl',
+            'local': 'src/ccmapper_mappings.ttl'},
     ]:
         yield data_ub_tasks.fetch_remote_gen(file['remote'], file['local'], [])
 
@@ -105,7 +105,10 @@ def task_build_core():
     return {
         'doc': 'Build distribution files (RDF/SKOS + MARC21XML) from source files',
         'basename': 'build-core',
-        'actions': [build],
+        'actions': [
+            'mkdir -p dist',
+            build
+        ],
         'file_dep': [
             'src/humord.xml',
             'src/ub-onto.ttl',
@@ -128,9 +131,9 @@ def task_build_extras():
         roald.set_uri_format(
             'http://data.ub.uio.no/%s/c{id}' % config['basename'], 'HUME')
         logger.info(' - Loading mymapper mappings')
-        roald.load('src/hume.rdf', format='skos')
+        roald.load('src/real_hume_mappings.ttl', format='skos')
         logger.info(' - Loading ccmapper mappings')
-        roald.load('src/ddc.rdf', format='skos')
+        roald.load('src/ccmapper_mappings.ttl', format='skos')
 
         includes = [
             '%s.scheme.ttl' % config['basename'],
@@ -158,11 +161,14 @@ def task_build_extras():
     return {
         'doc': 'Build distribution files (RDF/SKOS + MARC21XML) from source files',
         'basename': 'build-extras',
-        'actions': [build],
+        'actions': [
+            'mkdir -p dist',
+            build,
+        ],
         'file_dep': [
             'src/humord.xml',
-            'src/hume.rdf',
-            'src/ddc.rdf',
+            'src/real_hume_mappings.ttl',
+            'src/ccmapper_mappings.ttl',
             'src/ub-onto.ttl',
             '%s.scheme.ttl' % config['basename']
         ],
