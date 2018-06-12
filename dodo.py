@@ -150,13 +150,15 @@ def task_build_extras():
         logger.info('Wrote dist/%s.marc21.xml', config['basename'])
 
         # 3) RDF (core + mappings)
-        roald.export('dist/%s.complete.ttl' % config['basename'],
-                     format='rdfskos',
-                     include=includes,
-                     with_ccmapper_candidates=True,
-                     infer=True
-                     )
+        prepared = roald.prepare_export(format='rdfskos',
+            include=includes,
+            with_ccmapper_candidates=True,
+            infer=True
+        )
+        prepared.write('dist/%s.complete.ttl' % config['basename'], format='turtle')
         logger.info('Wrote dist/%s.complete.ttl', config['basename'])
+        prepared.write('dist/%s.complete.nt' % config['basename'], format='nt')
+        logger.info('Wrote dist/%s.complete.nt', config['basename'])
 
     return {
         'doc': 'Build distribution files (RDF/SKOS + MARC21XML) from source files',
@@ -174,7 +176,8 @@ def task_build_extras():
         ],
         'targets': [
             'dist/%s.marc21.xml' % config['basename'],
-            'dist/%s.complete.ttl' % config['basename']
+            'dist/%s.complete.ttl' % config['basename'],
+            'dist/%s.complete.nt' % config['basename'],
         ]
     }
 
@@ -191,7 +194,8 @@ def task_publish_dumps():
     return data_ub_tasks.publish_dumps_task_gen(config['dumps_dir'], [
         '%s.marc21.xml' % config['basename'],
         '%s.ttl' % config['basename'],
-        '%s.complete.ttl' % config['basename']
+        '%s.complete.ttl' % config['basename'],
+        '%s.complete.nt' % config['basename'],
     ])
 
 
