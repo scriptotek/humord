@@ -182,6 +182,32 @@ def task_build_extras():
     }
 
 
+def task_build_mappings():
+    src_uri = 'http://data.ub.uio.no/humord/'
+    mapping_sets = [
+        {
+            'source_files': ['src/real_hume_mappings.ttl'],
+            'target': 'realfagstermer',
+        },
+        {
+            'source_files': ['src/ccmapper_mappings.ttl'],
+            'target': 'ddc23no',
+        },
+    ]
+
+    yield {
+        'doc': 'Build mapping distributions',
+        'basename': 'build-mappings',
+        'name': None
+    }
+
+    for mapping_set in mapping_sets:
+        yield data_ub_tasks.build_mappings_gen(
+            mapping_set['source_files'],
+            'dist/%s-%s.mappings.nt' % (config['basename'], mapping_set['target']),
+            src_uri
+        )
+
 def task_build_json():
     return data_ub_tasks.gen_solr_json(config, 'humord')
 
@@ -196,6 +222,8 @@ def task_publish_dumps():
         '%s.ttl' % config['basename'],
         '%s.complete.ttl' % config['basename'],
         '%s.complete.nt' % config['basename'],
+        '%s-realfagstermer.mappings.nt' % config['basename'],
+        '%s-ddc23no.mappings.nt' % config['basename'],
     ])
 
 
