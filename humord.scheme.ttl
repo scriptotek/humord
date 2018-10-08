@@ -34,6 +34,7 @@ humord: a skos:ConceptScheme ;
         <http://data.ub.uio.no/dumps/humord.ttl> ;
     void:uriSpace "http://data.ub.uio.no/humord/" ;
     void:exampleResource <http://data.ub.uio.no/humord/c05316> ;
+    void:uriSpace "http://data.ub.uio.no/humord/" ;
     void:vocabulary skos: .
 
 library:k a foaf:Organization ;
