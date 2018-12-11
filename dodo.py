@@ -126,24 +126,31 @@ def task_build_extras():
     def build(task):
         logger.info('Building extras')
         roald = Roald()
-        logger.info(' - Loading humord.xml')
         roald.load('src/humord.xml', format='bibsys', language='nb')
-        roald.set_uri_format(
-            'http://data.ub.uio.no/%s/c{id}' % config['basename'], 'HUME')
-        logger.info(' - Loading mymapper mappings')
+        roald.set_uri_format('http://data.ub.uio.no/%s/c{id}' % config['basename'], 'HUME')
+
         roald.load('src/real_hume_mappings.ttl', format='skos')
-        logger.info(' - Loading ccmapper mappings')
+
+        # 1) MARC21 with $9 fields for CCMapper
+        marc21options = {
+            'vocabulary_code': 'noubomn',
+            'created_by': 'NO-TrBIB',
+            'include_extras': True,
+            'include_memberships': True,
+        }
+        roald.export('dist/%s.ccmapper.marc21.xml' %
+                     config['basename'], format='marc21',
+                     **marc21options)
+        logger.info('Wrote dist/%s.ccmapper.marc21.xml', config['basename'])
+
         roald.load('src/ccmapper_mappings.ttl', format='skos')
 
-        includes = [
-            '%s.scheme.ttl' % config['basename'],
-            'src/ub-onto.ttl'
-        ]
-
-        # 1) MARC21
+        # 1) MARC21 for Alma and general use
         marc21options = {
             'vocabulary_code': 'humord',
             'created_by': 'No-TrBIB',
+            'include_extras': False,
+            'include_memberships': False,
         }
         roald.export('dist/%s.marc21.xml' %
                      config['basename'], format='marc21', **marc21options)
@@ -151,7 +158,10 @@ def task_build_extras():
 
         # 3) RDF (core + mappings)
         prepared = roald.prepare_export(format='rdfskos',
-            include=includes,
+            include=[
+                '%s.scheme.ttl' % config['basename'],
+                'src/ub-onto.ttl'
+            ],
             with_ccmapper_candidates=True,
             infer=True
         )
@@ -176,6 +186,7 @@ def task_build_extras():
         ],
         'targets': [
             'dist/%s.marc21.xml' % config['basename'],
+            'dist/%s.ccmapper.marc21.xml' % config['basename'],
             'dist/%s.complete.ttl' % config['basename'],
             'dist/%s.complete.nt' % config['basename'],
         ]
@@ -219,6 +230,7 @@ def task_git_push():
 def task_publish_dumps():
     return data_ub_tasks.publish_dumps_task_gen(config['dumps_dir'], [
         '%s.marc21.xml' % config['basename'],
+        '%s.ccmapper.marc21.xml' % config['basename'],
         '%s.ttl' % config['basename'],
         '%s.complete.ttl' % config['basename'],
         '%s.complete.nt' % config['basename'],
