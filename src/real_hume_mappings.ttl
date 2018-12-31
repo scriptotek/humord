@@ -6438,11 +6438,6 @@ real:c008078
   skos:exactMatch hume:c07969 ;
   skos:prefLabel "Yrkesutdanning"@nb, "Yrkesutdanning"@nn .
 
-real:c008086
-  a skos:Concept ;
-  skos:exactMatch hume:c22723 ;
-  skos:prefLabel "Renewable resources"@en, "Fornybare ressurser"@nb, "Fornybare ressursar"@nn .
-
 real:c008088
   a skos:Concept ;
   skos:exactMatch hume:c16356 ;
@@ -7741,11 +7736,6 @@ real:c009835
   a skos:Concept ;
   skos:exactMatch hume:c08278 ;
   skos:prefLabel "Luftspeilinger"@nb, "Luftspeglingar"@nn .
-
-real:c009837
-  a skos:Concept ;
-  skos:exactMatch hume:c29169 ;
-  skos:prefLabel "Motiver"@nb, "Motiv"@nn .
 
 real:c009840
   a skos:Concept ;
