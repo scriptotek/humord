@@ -89,7 +89,7 @@ def task_build_core():
         # 1) MARC21
         # marc21options = {
         #     'vocabulary_code': 'humord',
-        #     'created_by': 'No-TrBIB',
+        #     'created_by': 'NO-TrBIB',
         # }
         # roald.export('dist/%s.marc21.xml' %
         #              config['basename'], format='marc21', **marc21options)
@@ -148,7 +148,7 @@ def task_build_extras():
         # 1) MARC21 for Alma and general use
         marc21options = {
             'vocabulary_code': 'humord',
-            'created_by': 'No-TrBIB',
+            'created_by': 'NO-TrBIB',
             'include_extras': False,
             'include_memberships': False,
         }
