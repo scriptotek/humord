@@ -43,10 +43,6 @@ def task_fetch_core():
     yield data_ub_tasks.git_pull_task_gen(config)
     for file in [
         {
-            'remote': 'http://wgate.bibsys.no/HUMEregister.xml',
-             'local': 'src/humord.xml'
-        },
-        {
             'remote': 'https://rawgit.com/scriptotek/data_ub_ontology/master/ub-onto.ttl',
              'local': 'src/ub-onto.ttl'
         }
