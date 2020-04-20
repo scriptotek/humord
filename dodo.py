@@ -132,6 +132,7 @@ def task_build_extras():
             'created_by': 'NO-TrBIB',
             'include_d9': 'simple',
             'include_memberships': True,
+            'include_narrower': False,
         }
         roald.export('dist/%s.marc21.xml' %
                      config['basename'], format='marc21', **marc21options)
@@ -147,6 +148,7 @@ def task_build_extras():
             'created_by': 'NO-TrBIB',
             'include_d9': 'complex',
             'include_memberships': True,
+            'include_narrower': True,
         }
         roald.export('dist/%s.ccmapper.marc21.xml' %
                      config['basename'], format='marc21',
