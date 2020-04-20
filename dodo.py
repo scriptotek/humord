@@ -121,15 +121,29 @@ def task_build_extras():
 
     def build(task):
         logger.info('Building extras')
+
         roald = Roald()
         roald.load('src/humord.xml', format='bibsys', language='nb')
         roald.set_uri_format('http://data.ub.uio.no/%s/c{id}' % config['basename'], 'HUME')
+
+        # 1) MARC21 for Alma and general use
+        marc21options = {
+            'vocabulary_code': 'humord',
+            'created_by': 'NO-TrBIB',
+            'include_d9': 'simple',
+            'include_memberships': True,
+        }
+        roald.export('dist/%s.marc21.xml' %
+                     config['basename'], format='marc21', **marc21options)
+        logger.info('Wrote dist/%s.marc21.xml', config['basename'])
+
+        # ------------------------------------------------------------------------------
 
         roald.load('src/real_hume_mappings.ttl', format='skos')
 
         # 1) MARC21 with $9 fields for CCMapper
         marc21options = {
-            'vocabulary_code': 'noubomn',
+            'vocabulary_code': 'humord',
             'created_by': 'NO-TrBIB',
             'include_d9': 'complex',
             'include_memberships': True,
@@ -139,18 +153,9 @@ def task_build_extras():
                      **marc21options)
         logger.info('Wrote dist/%s.ccmapper.marc21.xml', config['basename'])
 
-        roald.load('src/ccmapper_mappings.ttl', format='skos')
+        # ------------------------------------------------------------------------------
 
-        # 1) MARC21 for Alma and general use
-        marc21options = {
-            'vocabulary_code': 'humord',
-            'created_by': 'NO-TrBIB',
-            'include_d9': 'simple',
-            'include_memberships': False,
-        }
-        roald.export('dist/%s.marc21.xml' %
-                     config['basename'], format='marc21', **marc21options)
-        logger.info('Wrote dist/%s.marc21.xml', config['basename'])
+        roald.load('src/ccmapper_mappings.ttl', format='skos')
 
         # 3) RDF (core + mappings)
         prepared = roald.prepare_export(format='rdfskos',
