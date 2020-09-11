@@ -3,6 +3,11 @@
 import logging
 import logging.config
 import yaml
+import paramiko
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 with open('logging.yml') as cfg:
     logging.config.dictConfig(yaml.safe_load(cfg))
@@ -31,6 +36,53 @@ DOIT_CONFIG = {
         'fuseki',
     ]
 }
+
+
+def task_fetch_from_bibsys_sftp():
+
+    def uptodate(task, values):
+        host,port = "sftp.bibsys.no",22
+        transport = paramiko.Transport((host,port))
+        username,password = os.getenv("SFTP_USER"), os.getenv("SFTP_PASSWORD")
+        transport.connect(None,username,password)
+        sftp = paramiko.SFTPClient.from_transport(transport)
+        sftp.chdir('/home')
+        files = sorted(sftp.listdir())
+        latest_file = files.pop()
+        def save_latest_file():
+            return {'latest_file': latest_file}
+        task.value_savers.append(save_latest_file)
+        return values.get('latest_file') == latest_file
+
+    def fetch(task):
+        host,port = "sftp.bibsys.no",22
+        transport = paramiko.Transport((host,port))
+        username,password = os.getenv("SFTP_USER"), os.getenv("SFTP_PASSWORD")
+        transport.connect(None,username,password)
+        sftp = paramiko.SFTPClient.from_transport(transport)
+        sftp.chdir('/home')
+        files = sorted(sftp.listdir())
+        latest_file = files.pop()
+
+        # Cleanup old files
+        for other_file in files:
+            sftp.remove(other_file)
+
+        # Fetch latest file
+        sftp.get(latest_file, 'src/humord.marc21.tar.gz')
+
+    return {
+        'doc': 'Fetch Humord from Bibsys SFTP',
+        'basename': 'fetch-sftp',
+        'actions': [
+            fetch,
+            'tar -xOzf src/humord.marc21.tar.gz | xmllint -format - > src/humord.marc21.xml',
+        ],
+        'uptodate': [uptodate],
+        'targets': [
+            'src/humord.marc21.xml',
+        ],
+    }
 
 
 def task_fetch_core():
@@ -71,7 +123,7 @@ def task_build_core():
     def build(task):
         logger.info('Building new core dist')
         roald = Roald()
-        roald.load('src/humord.xml', format='bibsys', language='nb')
+        roald.load('src/humord.marc21.xml', format='marc21', language='nb')
         roald.set_uri_format(
             'http://data.ub.uio.no/%s/c{id}' % config['basename'])
         roald.save('%s.json' % config['basename'])
@@ -106,7 +158,7 @@ def task_build_core():
             build
         ],
         'file_dep': [
-            'src/humord.xml',
+            'src/humord.marc21.xml',
             'src/ub-onto.ttl',
             '%s.scheme.ttl' % config['basename']
         ],

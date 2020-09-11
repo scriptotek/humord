@@ -8,3 +8,4 @@ solr/humord.json
 dumps/
 dist/
 humord.json
+.env
