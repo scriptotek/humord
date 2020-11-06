@@ -175,7 +175,7 @@ def task_build_extras():
         logger.info('Building extras')
 
         roald = Roald()
-        roald.load('src/humord.xml', format='bibsys', language='nb')
+        roald.load('src/humord.marc21.xml', format='marc21', language='nb')
         roald.set_uri_format('http://data.ub.uio.no/%s/c{id}' % config['basename'], 'HUME')
 
         # 1) MARC21 for Alma and general use
@@ -235,7 +235,7 @@ def task_build_extras():
             build,
         ],
         'file_dep': [
-            'src/humord.xml',
+            'src/humord.marc21.xml',
             'src/real_hume_mappings.ttl',
             'src/ccmapper_mappings.ttl',
             'src/ub-onto.ttl',
