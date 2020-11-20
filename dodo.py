@@ -129,7 +129,7 @@ def task_build_core():
             'reply': os.getenv('MAIL_REPLY'),
             'recipients': os.getenv('MAIL_RECIPIENTS').split(','),
         })
-        roald.load('src/humord.marc21.xml', format='marc21', language='nb')
+        roald.load('src/humord.marc21.xml', format='marc21', language='nb', vocabulary_code='humord')
         roald.set_uri_format(
             'http://data.ub.uio.no/%s/c{id}' % config['basename'])
         roald.save('%s.json' % config['basename'])
@@ -186,7 +186,7 @@ def task_build_extras():
             'reply': os.getenv('MAIL_REPLY'),
             'recipients': os.getenv('MAIL_RECIPIENTS').split(','),
         })
-        roald.load('src/humord.marc21.xml', format='marc21', language='nb')
+        roald.load('src/humord.marc21.xml', format='marc21', language='nb', vocabulary_code='humord')
         roald.set_uri_format('http://data.ub.uio.no/%s/c{id}' % config['basename'], 'HUME')
 
         # 1) MARC21 for Alma and general use
