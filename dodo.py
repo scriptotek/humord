@@ -5,6 +5,7 @@ import logging.config
 import yaml
 import paramiko
 import os
+import sys
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -13,6 +14,8 @@ with open('logging.yml') as cfg:
     logging.config.dictConfig(yaml.safe_load(cfg))
 
 logger = logging.getLogger()
+
+logger.info('Using Python %s' % sys.version.replace('\n', ' '))
 
 from doit import get_var
 from roald import Roald
