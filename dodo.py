@@ -5,6 +5,7 @@ import logging.config
 import yaml
 import paramiko
 import os
+import re
 import sys
 from dotenv import load_dotenv
 load_dotenv()
@@ -132,7 +133,7 @@ def task_build_core():
             'reply': os.getenv('MAIL_REPLY'),
             'recipients': os.getenv('MAIL_RECIPIENTS').split(','),
         })
-        roald.load('src/humord.marc21.xml', format='marc21', language='nb', vocabulary_code='humord')
+        roald.load('src/humord.marc21.xml', format='marc21', language='nb', vocabulary_code='humord', id_validator=re.compile('HUME\d{5,}'))
         roald.set_uri_format(
             'http://data.ub.uio.no/%s/c{id}' % config['basename'])
         roald.save('%s.json' % config['basename'])
