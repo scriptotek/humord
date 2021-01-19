@@ -235,7 +235,8 @@ def task_build_extras():
                 'src/ub-onto.ttl'
             ],
             with_ccmapper_candidates=True,
-            infer=True
+            infer=True,
+            infer_top_concepts=True
         )
         prepared.write('dist/%s.complete.ttl' % config['basename'], format='turtle')
         logger.info('Wrote dist/%s.complete.ttl', config['basename'])
