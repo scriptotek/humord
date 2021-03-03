@@ -24,8 +24,8 @@ JSON (RoaldIII data model) using [RoaldIII](https://github.com/realfagstermer/ro
 RoaldIII is also used to mix in mappings before exporting
 RDF/SKOS and MARC21.
 
-* `pip install -r requirements.txt` to install dependencies needed for the conversion.
-* `doit build` to do the actual conversion. This only runs if any of the source files
+* `poetry install` to install dependencies needed for the conversion.
+* `poetry run doit build` to do the actual conversion. This only runs if any of the source files
 have changed or any of the target files are missing. To force a conversion even if no
 files have changed, run `doit forget build && doit build` (useful during development).
 

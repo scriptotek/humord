@@ -1,7 +1,0 @@
-doit
-rdflib
-pyyaml
-paramiko
-python-dotenv
-git+git://github.com/realfagstermer/roald.git
-git+git://github.com/scriptotek/data_ub_tasks.git
