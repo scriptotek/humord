@@ -114,10 +114,10 @@ def task_fetch_extras():
         'name': None
     }
     for file in [
-        {'remote': 'https://lambda.biblionaut.net/export/real_hume_mappings.ttl',
-            'local': 'src/real_hume_mappings.ttl'},
-        {'remote': 'https://lambda.biblionaut.net/export/ccmapper_mappings.ttl',
-            'local': 'src/ccmapper_mappings.ttl'},
+        #{'remote': 'https://lambda.biblionaut.net/export/real_hume_mappings.ttl',
+        #    'local': 'src/real_hume_mappings.ttl'},
+        #{'remote': 'https://lambda.biblionaut.net/export/ccmapper_mappings.ttl',
+        #    'local': 'src/ccmapper_mappings.ttl'},
     ]:
         yield data_ub_tasks.fetch_remote_gen(file['remote'], file['local'], [])
 
