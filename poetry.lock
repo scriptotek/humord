@@ -322,7 +322,7 @@ otsrdflib = ">=0.5.0"
 rdflib = "*"
 requests = "*"
 six = "*"
-skosify = "rev master"
+skosify = {git = "https://github.com/NatLibFi/Skosify.git", rev = "master"}
 xmlwitch = "0.3.0"
 
 [package.source]
@@ -342,20 +342,13 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 [[package]]
 name = "skosify"
 version = "2.3.0"
-description = ""
+description = "SKOS converter for RDFS/OWL/SKOS vocabularies."
 category = "main"
 optional = false
 python-versions = "*"
-develop = false
 
 [package.dependencies]
 rdflib = "*"
-
-[package.source]
-type = "git"
-url = "https://github.com/NatLibFi/Skosify.git"
-reference = "master"
-resolved_reference = "5e396d880046b03c9739088834fef8781b9e0527"
 
 [[package]]
 name = "sparqlwrapper"
@@ -666,7 +659,10 @@ six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
-skosify = []
+skosify = [
+    {file = "skosify-2.3.0-py2.py3-none-any.whl", hash = "sha256:c147043c2abe9ca64489eca0f8a5ca891b84118d298027e40287bdd6819668d4"},
+    {file = "skosify-2.3.0.tar.gz", hash = "sha256:012beee78f23038edbb5783f7163afb3fedd2d8a0b68cfc2408566df59bb5611"},
+]
 sparqlwrapper = [
     {file = "SPARQLWrapper-1.8.5-py2-none-any.whl", hash = "sha256:357ee8a27bc910ea13d77836dbddd0b914991495b8cc1bf70676578155e962a8"},
     {file = "SPARQLWrapper-1.8.5-py2.7.egg", hash = "sha256:17ec44b08b8ae2888c801066249f74fe328eec25d90203ce7eadaf82e64484c7"},
