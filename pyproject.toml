@@ -8,12 +8,12 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.8"
 doit = "^0.33.1"
-rdflib = "^5.0.0"
+rdflib = "^6.0.0"
 PyYAML = "^5.4.1"
 python-dotenv = "^0.15.0"
 paramiko = "^2.7.2"
-roald = {git = "https://github.com/realfagstermer/roald.git"}
-data-ub-tasks = {git = "https://github.com/scriptotek/data_ub_tasks.git"}
+roald = {git = "https://github.com/realfagstermer/roald.git", branch="master"}
+data-ub-tasks = {git = "https://github.com/scriptotek/data_ub_tasks.git", branch="master"}
 
 [tool.poetry.dev-dependencies]
 
