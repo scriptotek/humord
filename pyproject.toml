@@ -11,7 +11,7 @@ doit = "^0.33.1"
 rdflib = "^6.0.0"
 PyYAML = "^5.4.1"
 python-dotenv = "^0.15.0"
-paramiko = "^2.7.2"
+paramiko = "^2.10.1"
 roald = {git = "https://github.com/uio-library/roald-converters.git", branch="master"}
 data-ub-tasks = {git = "https://github.com/scriptotek/data_ub_tasks.git", branch="master"}
 
