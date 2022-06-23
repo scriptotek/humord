@@ -407,7 +407,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "8f5782b7a95474ba867cc571087e041096d7e60c4a1b894667320bf7a78ac0d7"
+content-hash = "bd90209f282ae4db9f8b1111a162be86874447ebd7f796c33eb9fb72e7b1542a"
 
 [metadata.files]
 bcrypt = [
