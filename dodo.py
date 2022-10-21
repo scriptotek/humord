@@ -52,7 +52,8 @@ def task_fetch_from_bibsys_sftp():
         sftp = paramiko.SFTPClient.from_transport(transport)
         sftp.chdir('/home')
         files = sorted(sftp.listdir())
-        latest_file = files.pop()
+        hume_files = [f for f in files if f.startswith('HUME')]
+        latest_file = hume_files.pop()
         def save_latest_file():
             return {'latest_file': latest_file}
         task.value_savers.append(save_latest_file)
@@ -66,10 +67,11 @@ def task_fetch_from_bibsys_sftp():
         sftp = paramiko.SFTPClient.from_transport(transport)
         sftp.chdir('/home')
         files = sorted(sftp.listdir())
-        latest_file = files.pop()
+        hume_files = [f for f in files if f.startswith('HUME')]
+        latest_file = hume_files.pop()
 
         # Cleanup old files
-        for other_file in files:
+        for other_file in hume_files:
             sftp.remove(other_file)
 
         # Fetch latest file

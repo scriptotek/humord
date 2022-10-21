@@ -9,3 +9,4 @@ dumps/
 dist/
 humord.json
 .env
+/env
