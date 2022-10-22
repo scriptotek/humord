@@ -89,7 +89,7 @@ SPARQLWrapper = "*"
 type = "git"
 url = "https://github.com/scriptotek/data_ub_tasks.git"
 reference = "master"
-resolved_reference = "4ee5c56eecb3116c5dd735064a10da5aaa622e9c"
+resolved_reference = "b539e923e33ac837102070ccf07ec144f2f98e09"
 
 [[package]]
 name = "doit"
@@ -407,7 +407,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "1652e0eb1c5ec96552c986089182ceed58bc2b2e275f30eda987dbb0b1746316"
+content-hash = "8398693454506b0a34cf9173d2d0036a3bfdbcbbc1be2fef3f6aec27b77bb664"
 
 [metadata.files]
 bcrypt = []
