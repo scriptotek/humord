@@ -76,7 +76,6 @@ def task_fetch_from_bibsys_sftp():
 
         # Fetch latest file
         sftp.get(latest_file, 'src/humord.marc21.tar.gz')
-
     return {
         'doc': 'Fetch Humord from Bibsys SFTP',
         'basename': 'fetch-sftp',
