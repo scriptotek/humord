@@ -8,10 +8,10 @@ handlers:
   file:
     class: logging.handlers.RotatingFileHandler
     backupCount: 3
-    level: DEBUG 
+    level: INFO 
     formatter: simple
     filename: 'dodo.log'
 root:
-  level: DEBUG
+  level: INFO
   handlers: ['file']
 
